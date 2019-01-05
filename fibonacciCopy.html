@@ -1,0 +1,89 @@
+<script>
+
+/*  Prints the fibonacci sequence to the console.
+Accepts a begining and ending parameter.  The sequence from 0 goes:
+0, 1, 1, 2, 3, 5, 8 and so on.  The first parameter isn't a numeric value in
+the sequence, but the position in the sequence.  The second parameter is the
+length of the sequence, not the specific numeric value where to finish .
+So if you want to see the sequence from zero to twenty, the parameters would
+be 'fibonacci(0, 20)'.  If you want to see the sequence from twenty to forty,
+the parameters would be 'fibonacci(20, 40).' */
+
+  function fibonacci(whereToStart, lengthOfSequence) {
+    var secondToLast;
+    var lastNumber;
+
+    /*Since there is a 'where to begin parameter', we need the last two numbers of
+    the sequence leading up to where we will now begin.  fibGetter finds the last
+    two numbers and stores them in the above variables */
+    fibGetter(whereToStart);
+    var first = lastNumber
+    var second = secondToLast + lastNumber;
+    var sum;
+
+    if (whereToStart === 0) {
+      first = 0;
+      second = 1;
+    }
+
+    if (whereToStart === 1) {
+      first = 1;
+      second = 1;
+    }
+    for (var i = 0; i < lengthOfSequence; i++) {
+      console.log(first);
+      sum = first + second;
+      first = second;
+      second = sum;
+    }
+
+//will find entire fib sequence up to the length you set in parameter.
+    function fibGetter(sequenceLength) {
+      if (sequenceLength === 0) {
+        return undefined;
+      }
+      var firstNumber = 0;
+      var secondNumber = 1;
+      var numberOfCalculations = 0;
+      var currentNumber = 0;
+      calculateFibonacci();
+
+      //Recursively prints numbers.
+      function calculateFibonacci() {
+        currentNumber = firstNumber + secondNumber;
+        numberOfCalculations++;
+
+        if (numberOfCalculations < sequenceLength) {
+          secondToLast = firstNumber;
+          lastNumber = secondNumber;
+          firstNumber = secondNumber;
+          secondNumber = currentNumber;
+          calculateFibonacci();
+        }
+      }
+      return;
+    }
+  }
+
+    // function fibonacci(sequenceLength) {
+    //   var firstNumber = 0;
+    //   var secondNumber = 1;
+    //   var numberOfCalculations = 0;
+    //   var currentNumber = 0;
+    //   calculateFibonacci();
+    //
+    //   function calculateFibonacci() {
+    //     console.log(currentNumber);
+    //     currentNumber = firstNumber + secondNumber;
+    //     numberOfCalculations++;
+    //     firstNumber = secondNumber;
+    //     secondNumber = currentNumber;
+    //
+    //     if (numberOfCalculations < sequenceLength) {
+    //       calculateFibonacci();
+    //     }else {
+    //       return;
+    //     }
+    //   }
+    // }
+</script>
